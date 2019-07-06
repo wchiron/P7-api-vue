@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
 header {
   display: flex;
   justify-content: center;
@@ -14,26 +19,48 @@ header {
   header img {
     height: 69px; }
 
-.container-fluid .starsOuter {
-  position: relative;
-  display: inline-block;
-  font-size: 0.7rem; }
-.container-fluid .starsInner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0; }
-.container-fluid .starsOuter::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: #ccc; }
-.container-fluid .starsInner::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: #e7711b; }
+.row, .container-fluid {
+  height: 100%;
+  width: 100%; }
+  .row #floating-panel, .container-fluid #floating-panel {
+    position: absolute;
+    left: 31%;
+    z-index: 5;
+    background-color: #f5f5f5;
+    padding: 5px;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    line-height: 30px;
+    padding-left: 10px; }
+  .row #map, .container-fluid #map {
+    height: 100%;
+    width: 100%; }
+  .row .starsOuter, .container-fluid .starsOuter {
+    position: relative;
+    display: inline-block;
+    font-size: 0.7rem; }
+  .row .starsInner, .container-fluid .starsInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0; }
+  .row .starsOuter::before, .container-fluid .starsOuter::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ccc; }
+  .row .starsInner::before, .container-fluid .starsInner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #e7711b; }
+  .row #sort-option, .container-fluid #sort-option {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 10px 0; }
+  .row #sortMinStars, .container-fluid #sortMinStars {
+    margin-right: 20px; }
 
 /*# sourceMappingURL=style.css.map */

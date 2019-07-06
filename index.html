@@ -26,9 +26,9 @@
 
         <div class="container-fluid" id="app">
             <div class="row">
-                <!-- <div id="floating-panel">
-                    <button type="button" class="btn btn-outline-primary btn-sm" id="searchAreaButton">Rechercher dans cette zone</button>
-                </div> -->
+                <div id="floating-panel">
+                    <button type="button" class="btn btn-outline-primary btn-sm" id="searchAreaButton" @click="newMap.updateNearbyRestaurants()">Rechercher dans cette zone</button>
+                </div>
                 <!-- <div id="pac-container">
                     <input id="pac-input" type="text" placeholder="Chercher par restaurant">
                 </div> -->
@@ -84,6 +84,7 @@
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqxE4oHzIGt8Bg9Eb3yhjz6-arNbRbE5A&callback=initMap&libraries=places">
         </script>
+        <script src="classMyMap.js"></script>
         <script src="script.js"></script> 
         <script src="https://kit.fontawesome.com/8b1a29674e.js"></script>
     </body>

@@ -1,3 +1,5 @@
+"use strict";
+
 function calculateAverageRatings(restaurant) {
     let totalRating = 0;
     let averageRating = 0;
@@ -54,7 +56,7 @@ Vue.component("selected-restaurant-details", {
                 </div>
     `,
     // use v-for in line52 to loop through the restaurant ratings directly, then only show the comment part of the rating
-    
+
     computed: {  // computed properties to be used only in this component
         averageRatings() {
             return calculateAverageRatings(this.restaurantToShow); // pass the props as parameter
@@ -64,14 +66,6 @@ Vue.component("selected-restaurant-details", {
             let starPercentage = Math.round((this.averageRatings/5) * 100);
             return starPercentage;
         },
-
-        commentToShow() {
-            let commentToShow = "";
-            this.restaurantToShow.ratings.forEach(function(ratings) {
-                commentToShow += "<p>Avis : " + ratings.comment + "</br></p>"; 
-            })
-            return commentToShow;
-        }
     }
 
 })
@@ -88,6 +82,27 @@ const app = new Vue ({  // things created in new Vue can only be used in new Vue
     methods: {  // methods created in the app can be used in the whole html but not in the components
         
     },
+    watch: {
+        restaurants: function(newValue, oldValue) { 
+            newMap.clearMarkers();
+            this.filteredListRestaurant.forEach((restaurant) => {
+                newMap.addMarker(restaurant);
+            });
+        },
+
+        minStars: function(newValue, oldValue) {
+            newMap.clearMarkers();
+            this.filteredListRestaurant.forEach((restaurant) => {
+                newMap.addMarker(restaurant);
+            });
+        },
+        maxStars: function(newValue, oldValue) {
+            newMap.clearMarkers();
+            this.filteredListRestaurant.forEach((restaurant) => {
+                newMap.addMarker(restaurant);
+            });
+        }
+    },
     computed: { // no parameters allowed in computed, if a function needs parameters, it will be in methods
         filteredListRestaurant() {
             const listResultAccordingOption = this.restaurants.filter((restaurant) => {
@@ -101,6 +116,22 @@ const app = new Vue ({  // things created in new Vue can only be used in new Vue
     }
 })
 
+let newMap; // declare newMap here to make it a global variable but only assign value when initMap is ready, line 109
 function initMap() {
-    console.log("Mouah")
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 48.8566969, lng: 2.3514616},
+        zoom: 14
+    });
+
+    newMap = new MyMap(map); 
+    newMap.focusOnUserPosition();
+
 }
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+  }

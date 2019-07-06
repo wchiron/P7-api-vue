@@ -19,6 +19,12 @@ $googleMaps-color : #4285F4;
     border-radius: .25rem;
 }
 
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 // .siteName
 header {
     display: flex;
@@ -42,7 +48,28 @@ header {
     }
 }
 
-.container-fluid {
+.row, .container-fluid {
+    height: 100%;
+    width: 100%;
+
+    #floating-panel { // search this area button
+        position: absolute;
+        // top: 10px;
+        left: 31%;
+        z-index: 5;
+        background-color: $bgc;
+        padding: 5px;
+        text-align: center;
+        font-family: $main-font;
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+
     .starsOuter {  // star style groups are not inside of any div group below because they are used from 2 different divs, leave them here to be accessed by both divs
         position: relative;
         display: inline-block;
@@ -71,5 +98,15 @@ header {
         font-weight: 900;
         color: $rating-color;
     }
+
+    #sort-option {
+        margin-bottom: 30px;
+        text-align: center;
+        padding: 10px 0;
+    }
+    #sortMinStars {
+        margin-right: 20px;
+    }
+
 
 }
