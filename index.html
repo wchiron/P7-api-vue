@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-        <!-- <script src="https://kit.fontawesome.com/8b1a29674e.js"></script> -->
+        <script src="https://kit.fontawesome.com/8b1a29674e.js"></script>
     </head>
 
     <body>
@@ -29,9 +29,6 @@
                 <div id="floating-panel">
                     <button type="button" class="btn btn-outline-primary btn-sm" id="searchAreaButton" @click="newMap.updateNearbyRestaurants()">Rechercher dans cette zone</button>
                 </div>
-                <!-- <div id="pac-container">
-                    <input id="pac-input" type="text" placeholder="Chercher par restaurant">
-                </div> -->
         
                 <div id="map" class="col-xl-9 col-lg-8 col-sm-12"></div>
                 <div id="list-wrap" class="col-xl-3 col-lg-4 col-sm-12">
@@ -48,7 +45,6 @@
         
                         <label for = "sort">Max</label>
                         <select v-model.number="maxStars" name="sort" id="sortMaxStars">
-                            <!-- <option value="maxAllStars" disabled="disabled">Tout</option> -->
                             <option value="1" :disabled="minStars > 1">1 étoile</option>
                             <option value="2" :disabled="minStars > 2">2 étoiles</option>
                             <option value="3" :disabled="minStars > 3">3 étoiles</option>
@@ -64,12 +60,15 @@
                     </div>
 
                     <div class="buttonReturnAndNewReview" v-if="selectedRestaurant !== null">
-                            <button type="button" class="btn btn-light btn-sm" id="returnToList" @click="selectedRestaurant = null"><i class="fas fa-arrow-left"></i> Retourner</button>
-                            <button type="button" class="btn btn-light btn-sm" id="addNewReview" data-toggle="modal" data-target="#form-addComment"><i class="fas fa-plus"></i> Ajouter un avis</button>
+                        <button type="button" class="btn btn-light btn-sm" id="returnToList" @click="selectedRestaurant = null"><i class="fas fa-arrow-left"></i> Retourner</button>
+                        <button type="button" class="btn btn-light btn-sm" id="addNewReview" @click="showForm = true"><i class="fas fa-plus"></i> Ajouter un avis</button>
                     </div>
 
-                    <div v-if="selectedRestaurant !== null">
+                    <div v-if="selectedRestaurant !== null" class="restaurantDetailsAndForm">
                         <selected-restaurant-details :restaurant-to-show="selectedRestaurant"></selected-restaurant-details>
+                        <div v-if="showForm === true">
+                            <form-add-new-comment :restaurant-To-Add-New-Comment="selectedRestaurant" :if-show-form="showForm" @closed-clicked="showForm = false"></form-add-new-comment>
+                        </div>
                     </div>
 
                 </div>
@@ -81,11 +80,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script type="text/javascript" src="listRestaurants.js"></script>
+        <script src="classMyMap.js"></script>
+        <script src="script.js"></script> 
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqxE4oHzIGt8Bg9Eb3yhjz6-arNbRbE5A&callback=initMap&libraries=places">
         </script>
-        <script src="classMyMap.js"></script>
-        <script src="script.js"></script> 
         <script src="https://kit.fontawesome.com/8b1a29674e.js"></script>
     </body>
 </html>

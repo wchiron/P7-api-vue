@@ -25,7 +25,8 @@ class MyMap {
                 }); 
                 infoWindow.open(this.map, marker); // open new marker
                 // link the event handle to click on the div of box-restaurant to show restaurant details when click on the marker
-                restaurantManager.showRestaurantDetailsWhenClicked(props); // link the marker to the list, restaurant details will be shown when clicked on the marker
+                app.selectedRestaurant = props;
+                // restaurantManager.showRestaurantDetailsWhenClicked(props); // link the marker to the list, restaurant details will be shown when clicked on the marker
             });
             this.markers.push(marker);
         }
@@ -136,4 +137,9 @@ class MyMap {
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+
+    streetView(restaurant) {
+        const streetViewPic = "https://maps.googleapis.com/maps/api/streetview?size=312x240&location=" + restaurant.lat + "," + restaurant.long + "&heading=151.78&pitch=-0.76&key=AIzaSyAqxE4oHzIGt8Bg9Eb3yhjz6-arNbRbE5A";
+        return streetViewPic;
+    } 
 }

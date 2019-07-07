@@ -99,14 +99,56 @@ header {
         color: $rating-color;
     }
 
-    #sort-option {
-        margin-bottom: 30px;
-        text-align: center;
-        padding: 10px 0;
-    }
-    #sortMinStars {
-        margin-right: 20px;
-    }
+    #list-wrap {
+        #sort-option {
+            margin-bottom: 30px;
+            padding: 10px 0;
+            text-align: center;
 
+            #sortMinStars {
+                margin-right: 20px;
+            }
+        }
 
+        .buttonReturnAndNewReview{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .btn { // two buttons, return to previous and add an new rating
+                padding-bottom: 1px;
+                padding-top: 1px;
+                font-size: 13px;
+                margin-bottom: 10px;
+                position: static;
+            }
+        } 
+
+        .restaurantDetailsAndForm {
+            // .restaurantDetails {
+                
+            // }
+
+            .addNewRating{
+                #title-addComment {
+                    color: $rating-color;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+                
+                textarea {
+                    @extend %textarea-style;
+                }
+
+                .form-footer {
+                    #buttons {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    }
+                }
+            }
+        }
+
+    }
 }
