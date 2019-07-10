@@ -71,13 +71,13 @@ class MyMap {
 
     // use user location to search nearby restaurants, function reusable for search this area function
     updateNearbyRestaurants(centerLocation) {
-        const center = centerLocation || this.map.getCenter(); // here is a const not let because everytime when this function is called, a new center is created, no modification will be made on the previous center
+        const center = centerLocation || this.map.getCenter(); // here is a const not let because everytime when this function is called, a new center is created, no modification will be made on the previous center. || means when there is no centerLocation passed as a parameter, this.map.getCenter() will be assigned as the value of this const
         const request = {
             location: center, // by passing the location as parameter, this function is reused when searchAreaButton button is clicked
             radius: '500',
             type: ['restaurant']
         };
-        app.restaurants = []; // clear the result list everytime the center changes to only show restaurant of the newest search
+        // app.restaurants = []; // clear the result list everytime the center changes to only show restaurant of the newest search
         const service = new google.maps.places.PlacesService(this.map);
         service.nearbySearch(request, this.nearbySearchCallback.bind(this)); // nearby search to get a list of restaurants with place id, using bind(this) to keep the this in the nearbySearchCallback, otherwise "this" is undefined in the parameter
     }

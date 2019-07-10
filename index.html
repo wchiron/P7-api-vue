@@ -27,13 +27,16 @@
         <div class="container-fluid" id="app">
             <div class="row">
                 <div id="floating-panel">
+                    <!-- onclick trigger the updateNearbyRestaurant funciton -->
                     <button type="button" class="btn btn-outline-primary btn-sm" id="searchAreaButton" @click="newMap.updateNearbyRestaurants()">Rechercher dans cette zone</button>
                 </div>
         
                 <div id="map" class="col-xl-9 col-lg-8 col-sm-12"></div>
                 <div id="list-wrap" class="col-xl-3 col-lg-4 col-sm-12">
+                    <!-- if there is no selectedRestaurant(meaning the page is not inside of a detail of one restaurant), show the sort-option -->
                     <div id="sort-option" class="sort" style="display: block;" v-if="!selectedRestaurant">
                         <label for = "sort">Min</label> 
+                        <!-- use v-model to pass the value of a form input, in this case in the app.watch function. and .number to convert the form value to an integer -->
                         <select v-model.number="minStars" name="sort" id="sortMinStars"> 
                             <option value="0">0 étoile</option>
                             <option value="1">1 étoile</option>
@@ -54,9 +57,14 @@
                     </div>
                     
                     <div id="listOfRestaurants" v-if="!selectedRestaurant"> 
-                        <!-- use v-if above to hide the restaurant list once a restaurant is clicked and the details are shown -->
-                        <restaurant-list-item :restaurant="filteredRestaurant" v-for="filteredRestaurant in filteredListRestaurant" @restaurant-selected="selectedRestaurant = filteredRestaurant"> </restaurant-list-item>
-                        <!-- avoid using v-if and v-for in the same html tag(same line), @restaurant-selected is from the emit -->
+                        <!-- use v-if above to hide the restaurant list once a restaurant is clicked and the details are shown. filteredListRestaurant is a computed property in the app vue-->
+                        <restaurant-list-item v-for="filteredRestaurant in filteredListRestaurant" :restaurant="filteredRestaurant" @restaurant-selected="selectedRestaurant = filteredRestaurant"> </restaurant-list-item>
+                        <!-- avoid using v-if and v-for in the same html tag(same line), use v-for to show already filtered restaurant instead of showing the whole list then filter it. then bind the filteredRestaurant as props for this component. @restaurant-selected is from the emit, set selectedRestaurant value to filteredRestaurant here so showRestaurantDetails component could have the right props -->
+                        
+                        <!-- listner to the emit event from the component, then trigger the function geoCoderGetLatlng inside the app, and it has to be a  -->
+                        <div v-if="showFormNewPlace === true">
+                            <form-add-new-place @pass-new-place-info="geoCoderGetLatlng" @close-adding-place-clicked="showFormNewPlace = false"></form-add-new-place>
+                        </div>
                     </div>
 
                     <div class="buttonReturnAndNewReview" v-if="selectedRestaurant !== null">
@@ -67,10 +75,10 @@
                     <div v-if="selectedRestaurant !== null" class="restaurantDetailsAndForm">
                         <selected-restaurant-details :restaurant-to-show="selectedRestaurant"></selected-restaurant-details>
                         <div v-if="showForm === true">
+                            <!-- restaurant-To-Add-New-Comment is the props of form-add-new-comment component, by doing =, pass selectedRestaurant as parameter to that component -->
                             <form-add-new-comment :restaurant-To-Add-New-Comment="selectedRestaurant" :if-show-form="showForm" @closed-clicked="showForm = false"></form-add-new-comment>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -79,6 +87,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-vue@2.0.0-rc.25/dist/bootstrap-vue.js"></script>
         <script type="text/javascript" src="listRestaurants.js"></script>
         <script src="classMyMap.js"></script>
         <script src="script.js"></script> 

@@ -1,4 +1,12 @@
-.row #list-wrap .restaurantDetailsAndForm .addNewRating textarea, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating textarea {
+.row #list-wrap .restaurantDetailsAndForm .restaurantDetails .showComment, .container-fluid #list-wrap .restaurantDetailsAndForm .restaurantDetails .showComment {
+  font-size: 13px;
+  margin-bottom: 5px; }
+
+.row #list-wrap #listOfRestaurants .boxRestaurant .restoName, .container-fluid #list-wrap #listOfRestaurants .boxRestaurant .restoName, .row #list-wrap #listOfRestaurants .boxRestaurant p, .container-fluid #list-wrap #listOfRestaurants .boxRestaurant p, .row #list-wrap .restaurantDetailsAndForm .restaurantDetails h6, .container-fluid #list-wrap .restaurantDetailsAndForm .restaurantDetails h6 {
+  font-size: 15px;
+  margin-bottom: 5px; }
+
+.row #list-wrap #listOfRestaurants #form-addNewPlace textarea, .container-fluid #list-wrap #listOfRestaurants #form-addNewPlace textarea, .row #list-wrap .restaurantDetailsAndForm .addNewRating textarea, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating textarea {
   width: 100%;
   height: 150px;
   border-style: unset;
@@ -62,29 +70,59 @@ header {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: #e7711b; }
-  .row #list-wrap #sort-option, .container-fluid #list-wrap #sort-option {
-    margin-bottom: 30px;
-    padding: 10px 0;
-    text-align: center; }
-    .row #list-wrap #sort-option #sortMinStars, .container-fluid #list-wrap #sort-option #sortMinStars {
-      margin-right: 20px; }
-  .row #list-wrap .buttonReturnAndNewReview, .container-fluid #list-wrap .buttonReturnAndNewReview {
-    display: flex;
-    width: 100%;
-    justify-content: space-between; }
-    .row #list-wrap .buttonReturnAndNewReview .btn, .container-fluid #list-wrap .buttonReturnAndNewReview .btn {
-      padding-bottom: 1px;
-      padding-top: 1px;
+  .row #list-wrap, .container-fluid #list-wrap {
+    height: 100%;
+    overflow: scroll;
+    margin-left: 0px; }
+    .row #list-wrap #sort-option, .container-fluid #list-wrap #sort-option {
+      margin-bottom: 30px;
+      padding: 10px 0;
+      text-align: center; }
+      .row #list-wrap #sort-option #sortMinStars, .container-fluid #list-wrap #sort-option #sortMinStars {
+        margin-right: 20px; }
+    .row #list-wrap #listOfRestaurants .boxRestaurant p, .container-fluid #list-wrap #listOfRestaurants .boxRestaurant p {
+      border-bottom: 0.5px solid #c6d4df; }
+    .row #list-wrap #listOfRestaurants .boxRestaurant .numberRating, .container-fluid #list-wrap #listOfRestaurants .boxRestaurant .numberRating {
       font-size: 13px;
+      margin-left: 5px; }
+    .row #list-wrap #listOfRestaurants #form-addNewPlace #addNewPlaceTitle, .container-fluid #list-wrap #listOfRestaurants #form-addNewPlace #addNewPlaceTitle {
+      color: #e7711b;
       margin-bottom: 10px;
-      position: static; }
-  .row #list-wrap .restaurantDetailsAndForm .addNewRating #title-addComment, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating #title-addComment {
-    color: #e7711b;
-    margin-bottom: 10px;
-    text-align: center; }
-  .row #list-wrap .restaurantDetailsAndForm .addNewRating .form-footer #buttons, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating .form-footer #buttons {
-    display: flex;
-    width: 100%;
-    justify-content: space-between; }
+      margin-top: 20px;
+      text-align: center; }
+    .row #list-wrap #listOfRestaurants #form-addNewPlace .form-control, .container-fluid #list-wrap #listOfRestaurants #form-addNewPlace .form-control {
+      margin-bottom: 10px; }
+    .row #list-wrap #listOfRestaurants #form-addNewPlace #labelRatingOptions, .container-fluid #list-wrap #listOfRestaurants #form-addNewPlace #labelRatingOptions {
+      margin-right: 8px; }
+    .row #list-wrap #listOfRestaurants #form-addNewPlace .form-footer #newPlaceButtons, .container-fluid #list-wrap #listOfRestaurants #form-addNewPlace .form-footer #newPlaceButtons {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly; }
+    .row #list-wrap #listOfRestaurants .listRestaurant :hover, .container-fluid #list-wrap #listOfRestaurants .listRestaurant :hover {
+      cursor: pointer; }
+    .row #list-wrap .buttonReturnAndNewReview, .container-fluid #list-wrap .buttonReturnAndNewReview {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-left: 10px; }
+      .row #list-wrap .buttonReturnAndNewReview .btn, .container-fluid #list-wrap .buttonReturnAndNewReview .btn {
+        padding-bottom: 1px;
+        padding-top: 1px;
+        font-size: 13px;
+        margin-bottom: 10px;
+        position: static; }
+    .row #list-wrap .restaurantDetailsAndForm .restaurantDetails h6, .container-fluid #list-wrap .restaurantDetailsAndForm .restaurantDetails h6 {
+      font-weight: bold; }
+    .row #list-wrap .restaurantDetailsAndForm .restaurantDetails .numberRating, .container-fluid #list-wrap .restaurantDetailsAndForm .restaurantDetails .numberRating {
+      font-size: 13px;
+      margin-left: 5px; }
+    .row #list-wrap .restaurantDetailsAndForm .addNewRating #title-addComment, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating #title-addComment {
+      color: #e7711b;
+      margin-bottom: 10px;
+      text-align: center; }
+    .row #list-wrap .restaurantDetailsAndForm .addNewRating .form-footer #buttons, .container-fluid #list-wrap .restaurantDetailsAndForm .addNewRating .form-footer #buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly; }
 
 /*# sourceMappingURL=style.css.map */

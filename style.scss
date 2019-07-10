@@ -100,6 +100,10 @@ header {
     }
 
     #list-wrap {
+        height: 100%;
+        overflow: scroll;
+        margin-left: 0px;
+
         #sort-option {
             margin-bottom: 30px;
             padding: 10px 0;
@@ -110,10 +114,63 @@ header {
             }
         }
 
+        #listOfRestaurants{
+            .boxRestaurant{
+                .restoName{
+                    @extend %nameAdress-style-shared;
+                }
+
+                p {
+                    border-bottom: 0.5px solid $border-color;
+                    @extend %nameAdress-style-shared;
+                }
+                .numberRating {
+                    font-size: 13px;
+                    margin-left: 5px;
+                }
+            }
+
+            #form-addNewPlace {
+                #addNewPlaceTitle {
+                    color: $rating-color;
+                    margin-bottom: 10px;
+                    margin-top: 20px;
+                    text-align: center;
+                }
+
+                .form-control {
+                    margin-bottom: 10px;
+                }
+
+                #labelRatingOptions {
+                    margin-right: 8px;
+                }
+
+                textarea {
+                    @extend %textarea-style;
+                }
+
+                .form-footer {
+                    #newPlaceButtons {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-evenly;
+                    }
+                }
+
+            }
+
+
+            .listRestaurant :hover{
+                cursor: pointer;
+            }
+        }
+
         .buttonReturnAndNewReview{
             display: flex;
             width: 100%;
             justify-content: space-between;
+            margin-left: 10px;
 
             .btn { // two buttons, return to previous and add an new rating
                 padding-bottom: 1px;
@@ -125,9 +182,20 @@ header {
         } 
 
         .restaurantDetailsAndForm {
-            // .restaurantDetails {
-                
-            // }
+            .restaurantDetails {
+                h6{
+                    @extend %nameAdress-style-shared;
+                    font-weight: bold;
+                }
+                .numberRating {
+                    font-size: 13px;
+                    margin-left: 5px;
+                }
+                .showComment {
+                    @extend %content-style-shared;
+                }
+
+            }
 
             .addNewRating{
                 #title-addComment {
@@ -144,7 +212,7 @@ header {
                     #buttons {
                     display: flex;
                     width: 100%;
-                    justify-content: space-between;
+                    justify-content: space-evenly;
                     }
                 }
             }
