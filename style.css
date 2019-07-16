@@ -73,7 +73,8 @@ header {
   .row #list-wrap, .container-fluid #list-wrap {
     height: 100%;
     overflow: scroll;
-    margin-left: 0px; }
+    margin-left: 0px;
+    margin-top: 5px; }
     .row #list-wrap #sort-option, .container-fluid #list-wrap #sort-option {
       margin-bottom: 30px;
       padding: 10px 0;

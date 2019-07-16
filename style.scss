@@ -34,7 +34,6 @@ header {
     .siteName {
         color: #6b717f;
         text-align: center;
-        // border-bottom: 1px $border-color solid;
         padding-bottom: 10px;
         padding-top: 10px;
         font-family: $main-font;
@@ -103,6 +102,7 @@ header {
         height: 100%;
         overflow: scroll;
         margin-left: 0px;
+        margin-top: 5px;
 
         #sort-option {
             margin-bottom: 30px;

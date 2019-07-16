@@ -17,9 +17,7 @@
 
     <body>
         <header>
-            <!-- <div class="logo"> -->
-                <img src="logo-nbg.png">
-            <!-- </div> -->
+            <img src="logo-nbg.png">
             <h1 class="siteName"><span>Resto</span>Hit</h1>
         </header>
 
@@ -58,7 +56,10 @@
                     
                     <div id="listOfRestaurants" v-if="!selectedRestaurant"> 
                         <!-- use v-if above to hide the restaurant list once a restaurant is clicked and the details are shown. filteredListRestaurant is a computed property in the app vue-->
-                        <restaurant-list-item v-for="filteredRestaurant in filteredListRestaurant" :restaurant="filteredRestaurant" @restaurant-selected="selectedRestaurant = filteredRestaurant"> </restaurant-list-item>
+                        <restaurant-list-item v-for="filteredRestaurant in filteredListRestaurant" 
+                                            :restaurant="filteredRestaurant" 
+                                            @restaurant-selected="selectedRestaurant = filteredRestaurant"> 
+                        </restaurant-list-item>
                         <!-- avoid using v-if and v-for in the same html tag(same line), use v-for to show already filtered restaurant instead of showing the whole list then filter it. then bind the filteredRestaurant as props for this component. @restaurant-selected is from the emit, set selectedRestaurant value to filteredRestaurant here so showRestaurantDetails component could have the right props -->
                         
                         <!-- listner to the emit event from the component, then trigger the function geoCoderGetLatlng inside the app, and it has to be a  -->

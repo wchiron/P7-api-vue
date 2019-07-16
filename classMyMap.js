@@ -4,6 +4,7 @@ class MyMap {
     constructor(map) {
         this.map = map;
         this.markers = []; // to replace var markers = [] in a class
+        this.infowindow = null;
     }
     
     addMarker(props) { // a method, it's a function in an objet
@@ -77,7 +78,7 @@ class MyMap {
             radius: '500',
             type: ['restaurant']
         };
-        // app.restaurants = []; // clear the result list everytime the center changes to only show restaurant of the newest search
+        app.restaurants = []; // clear the result list everytime the center changes to only show restaurant of the newest search
         const service = new google.maps.places.PlacesService(this.map);
         service.nearbySearch(request, this.nearbySearchCallback.bind(this)); // nearby search to get a list of restaurants with place id, using bind(this) to keep the this in the nearbySearchCallback, otherwise "this" is undefined in the parameter
     }
@@ -127,6 +128,32 @@ class MyMap {
                 // restaurantManager.sendListToHTML(listRestaurants); //update the list
             }
         }
+    }
+
+
+    clickHandlerAddNewPlace() {
+        //to add a new place, right click anywhere and show an infoWindow,
+        this.infowindow = new google.maps.InfoWindow({
+            // content: '<button type="button" class="btn btn-link" id="ifAddNewPlace" onclick="updateFormStatus()">Ajouter un endroit ici</button>'
+            content: '<button type="button" class="btn btn-link" id="ifAddNewPlace">Ajouter un nouveau endroit</button>'
+        });
+
+        google.maps.event.addListener(this.map, 'rightclick', (event) => {
+            this.infowindow.setPosition(event.latLng);
+            this.infowindow.open(this.map);
+
+            google.maps.event.addListener(this.infowindow, 'domready', function() { // with domready, this eventlistner will be added once the infoWindow is loaded
+                document.getElementById('ifAddNewPlace').addEventListener('click', updateFormStatus);
+            });
+
+            function updateFormStatus(){
+                app.showFormNewPlace = true;
+            };
+        }); 
+    }
+
+    closeInfoWindowAfterSubmit() { 
+        this.infowindow.close(this.map);
     }
 
     // handle geolocation error

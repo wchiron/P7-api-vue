@@ -159,7 +159,8 @@ Vue.component("form-add-new-place", {
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="5">5</option>           
+                                    <option value="5">5</option> 
+                                </select>              
                             </div> 
                             <br>
                             <textarea name="reviewForNewPlace" id="reviewForNewPlace" placeholder="Partager les détails de votre expérience à cet endroit" v-model="newPlaceComment" required></textarea> 
@@ -174,18 +175,16 @@ Vue.component("form-add-new-place", {
                 </div>`,
     methods: {
         onSubmitNewPlace() {
-            console.log("on submit new place"),
             this.$emit('pass-new-place-info', {
                 "restaurantName":this.newPlaceName,
                 "address":this.newPlaceStreet + ", " + this.newPlaceCity + " " + this.newPlaceZip,
                 "lat":0,
                 "long":0,
-                "ratings":[
-                    {
-                        "stars":this.newPlaceRating,
-                        "comment":this.newPlaceComment
-                    }
-                ],
+                "ratings":
+                {
+                    "stars":this.newPlaceRating,
+                    "comment":this.newPlaceComment
+                },
             });
         }
     },
@@ -204,7 +203,6 @@ const app = new Vue ({  // things created in new Vue can only be used in new Vue
     },
     methods: {  // methods created in the app can be used in the whole html but not in the components
         geoCoderGetLatlng(newPlaceInfo) {
-            console.log("geocoder function started");
 
             var geocoder = new google.maps.Geocoder();
 
@@ -216,48 +214,43 @@ const app = new Vue ({  // things created in new Vue can only be used in new Vue
                     "address": newPlaceInfo.address,
                     "lat": newPlaceLatLng.lat(),
                     "long": newPlaceLatLng.lng(),
-                    "ratings": [{
-                        "stars": newPlaceInfo.ratings.stars,
-                        "comment": newPlaceInfo.ratings.comment,
+                    "ratings":
+                    [{
+                        "stars":newPlaceInfo.ratings.stars,
+                        "comment":newPlaceInfo.ratings.comment,
                     }]
+                        
                 };
-                console.log(newPlaceComplet);
-                this.restaurants.push(newPlaceComplet); // instead of push, add new place to the beginning of the array
-                // newMap.addMarker(newPlaceComplet,markers);//reuse the newMap class allows to have the same function as the other markers
-                // infowindow.close(); // close the info window with the add new place button
+                // this.restaurants = [newPlaceComplet,...this.restaurants]; // create a new array by adding new var plus the whole old array
+                this.restaurants.push(newPlaceComplet);
+                newMap.closeInfoWindowAfterSubmit();// close the info window with the add new place button
 
-                // $("#inputNewName").val("");// empty the input values if user finishes adding new place
-                // $(".form-row").val("");
-                // $("#reviewForNewPlace").val(""); 
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
         });
         return false; 
+        },
 
-
-        }
-    },
-    watch: {
-        restaurants: function(newValue, oldValue) { // watchs data in the app, if their value changes, this function will be triggered
+        updateMarkers() {
             newMap.clearMarkers();
             this.filteredListRestaurant.forEach((restaurant) => {
                 newMap.addMarker(restaurant);
             });
+        }
+    },
+    watch: {
+        restaurants: function(newValue, oldValue) { // watchs variable data in the app, if their value changes, this function will be triggered
+            this.updateMarkers();
         },
 
         minStars: function(newValue, oldValue) { 
-            newMap.clearMarkers();
-            this.filteredListRestaurant.forEach((restaurant) => {
-                newMap.addMarker(restaurant);
-            });
+            this.updateMarkers();
         },
+
         maxStars: function(newValue, oldValue) {
-            newMap.clearMarkers();
-            this.filteredListRestaurant.forEach((restaurant) => {
-                newMap.addMarker(restaurant);
-            });
-        }
+            this.updateMarkers();
+        },
     },
     computed: { // no parameters allowed in computed, if a function needs parameters, it will be in methods
         filteredListRestaurant() {
@@ -272,6 +265,8 @@ const app = new Vue ({  // things created in new Vue can only be used in new Vue
     }
 });
 
+// -----------------------------------initMap-------------------------------------
+
 let newMap; // declare newMap here to make it a global variable but only assign value when initMap is ready, line 109
 function initMap() {
     const map = new google.maps.Map(document.getElementById('map'), {
@@ -282,26 +277,7 @@ function initMap() {
     newMap = new MyMap(map); 
     newMap.focusOnUserPosition();
 
-    //to add a new place, right click anywhere and show an infoWindow,
-    const infowindow =  new google.maps.InfoWindow({
-		content: '<button type="button" class="btn btn-link" id="ifAddNewPlace">Ajouter un endroit ici</button>'
-    });
-
-	google.maps.event.addListener(map, 'rightclick', function(event) {
-		infowindow.setPosition(event.latLng);
-        infowindow.open(map);
-
-        
-        // first geocoder, get the place where right clicked, get the address from the latlng and pre-fill the form
-        // const geocoder = new google.maps.Geocoder(); 
-        // const latLng = {lat: event.latLng.lat(), lng: event.latLng.lng()}; // get the latLng where right-clicked
-        document.getElementById("ifAddNewPlace").addEventListener("click", updateFormStatus);
-        // app.showFormNewPlace = true;
-        function updateFormStatus(){
-            app.showFormNewPlace = true;
-        };
-    }); 
-
+    newMap.clickHandlerAddNewPlace(); //put the code in a method in myMap class since it's a global value, created a function to close the infowindow in myMap to be called in the app when the form to add new place is submitted
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -311,4 +287,3 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                           'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
-
